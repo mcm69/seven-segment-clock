@@ -88,16 +88,21 @@ const Digit = (props) => {
         `}
       </style>
 
-      {segments.map((seg) => (
-        <polygon class="inactive" points={seg} />
-      ))}
+      {
+        // draw the inactive segments first
+        segments.map((seg, i) => (
+          <polygon className="inactive" points={seg} key={1000 + i} />
+        ))
+      }
 
       {segmentMap[digit]
         ? // if the shape of the digit is known, draw the segments
           // from the segment map
           segmentMap[digit]
             .map((s) => segments[s])
-            .map((seg, i) => <polygon class="active" points={seg} key={i} />)
+            .map((seg, i) => (
+              <polygon className="active" points={seg} key={i} />
+            ))
         : //otherwise, don't draw any active segments
           null}
     </svg>
